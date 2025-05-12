@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Admin</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <style>
+    body {
+      background-color: #f5f5f5;
+    }
+    .navbar-brand {
+      font-weight: bold;
+    }
+    .card {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Admin Dashboard</a>
+      <button class="btn btn-outline-light ms-auto" id="logoutBtn">Logout</button>
+    </div>
+  </nav>
+
+  <div class="container mt-4">
+    <h3 class="mb-4">Kelola Data Nasabah</h3>
+
+    <!-- Form Tambah Nasabah -->
+    <div class="card">
+      <div class="card-header bg-primary text-white">Tambah Nasabah</div>
+      <div class="card-body">
+        <form id="formTambahNasabah">
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <label for="newFullName" class="form-label">Nama Lengkap</label>
+              <input type="text" class="form-control" id="newFullName" required />
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="newUsername" class="form-label">Username</label>
+              <input type="text" class="form-control" id="newUsername" required />
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="newPassword" class="form-label">Password</label>
+              <input type="password" class="form-control" id="newPassword" required />
+            </div>
+          </div>
+          <div class="d-grid">
+            <button class="btn btn-success" type="submit">Tambah Nasabah</button>
+          </div>
+          <div class="alert alert-danger mt-3 d-none" id="tambahNasabahAlert"></div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Tabel Data Nasabah -->
+    <div class="card">
+      <div class="card-header bg-info text-white">Daftar Nasabah</div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover" id="tabelNasabah">
+            <thead class="table-light">
+              <tr>
+                <th>Nama Lengkap</th>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Rekening</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="nasabahBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Tambah Transaksi -->
+    <div class="card">
+      <div class="card-header bg-warning">Tambah Transaksi (Tabungan/Pinjaman)</div>
+      <div class="card-body">
+        <form id="formTambahTransaksi">
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <label for="trxUsername" class="form-label">Username Nasabah</label>
+              <input type="text" class="form-control" id="trxUsername" required />
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="trxJenis" class="form-label">Jenis</label>
+              <select class="form-select" id="trxJenis" required>
+                <option value="Tabungan">Tabungan</option>
+                <option value="Pinjaman">Pinjaman</option>
+              </select>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="trxJumlah" class="form-label">Jumlah</label>
+              <input type="number" class="form-control" id="trxJumlah" required />
+            </div>
+          </div>
+          <div class="d-grid">
+            <button class="btn btn-primary" type="submit">Simpan Transaksi</button>
+          </div>
+          <div class="alert alert-danger mt-3 d-none" id="transaksiAlert"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="dashboard_admin.js"></script>
+</body>
+</html>
