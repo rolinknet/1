@@ -1,30 +1,32 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbwa478EasSaGpOOrUMNP1j9Xd-TFJkZ7bigKr0MyDWf1Sr2WQ1nVlaV-0KwPnlE83pw/exec";
-
-document.getElementById("loginForm").addEventListener("submit", async (e) => {
+// login.js
+function login(e) {
   e.preventDefault();
-  const username = document.getElementById("username").value.trim();
-  const password = document.getElementById("password").value.trim();
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
   const role = document.getElementById("role").value;
-  const errorDiv = document.getElementById("loginError");
 
-  errorDiv.textContent = "";
+  const params = new URLSearchParams({
+    action: 'login',
+    username,
+    password,
+    role,
+  });
 
-  try {
-    const res = await fetch(`${API_URL}?action=login&username=${username}&password=${password}&role=${role}`);
-    const data = await res.json();
-
-    if (data.success) {
-      sessionStorage.setItem("user", JSON.stringify(data.data));
-      if (role === "admin") {
-        window.location.href = "dashboard_admin.html";
+  fetch(`https://script.google.com/macros/s/AKfycby5JQZag5S6T92L2c8MBZvn08zxGt-o7pqr2EZB4cyg-BjbYVrKGFkkB5UmMetsYkIC/exec?${params.toString()}`)
+    .then((res) => {
+      if (!res.ok) throw new Error('HTTP error ' + res.status);
+      return res.json();
+    })
+    .then((data) => {
+      if (data.success) {
+        localStorage.setItem("user", JSON.stringify(data.data));
+        window.location.href = role === 'admin' ? 'admin.html' : 'nasabah.html';
       } else {
-        window.location.href = "dashboard_nasabah.html";
+        document.getElementById("error-msg").innerText = data.error;
       }
-    } else {
-      errorDiv.textContent = data.error || "Login gagal.";
-    }
-  } catch (err) {
-    errorDiv.textContent = "Terjadi kesalahan jaringan.";
-    console.error(err);
-  }
-});
+    })
+    .catch((err) => {
+      document.getElementById("error-msg").innerText = "Kesalahan jaringan.";
+      console.error("Login error:", err);
+    });
+}
