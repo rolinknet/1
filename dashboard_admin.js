@@ -1,4 +1,4 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbwa478EasSaGpOOrUMNP1j9Xd-TFJkZ7bigKr0MyDWf1Sr2WQ1nVlaV-0KwPnlE83pw/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycby5JQZag5S6T92L2c8MBZvn08zxGt-o7pqr2EZB4cyg-BjbYVrKGFkkB5UmMetsYkIC/exec";
 
 // Form Tambah Nasabah
 const formTambahNasabah = document.getElementById('formTambahNasabah');
